@@ -27,20 +27,20 @@ pWMGG=function(X,lambda,beta,alpha){
 #pWMGG(X,lambda,beta,alpha)
 ######### WMGG-random numbers generation procedure ### 1 time
 fM=function(X,lambda,beta,alpha){
-  dWMGG(X,lambda,beta,alpha)/dlnorm(X, meanlog = lambda, sdlog = beta, log = FALSE)
+  fMGG(X,lambda,beta,alpha)/dgamma(X, shape=beta, scale = lambda)
 }
 
 rWMGG=function(n,lambda,beta,alpha){
-  M <-optimise(f=function(X){fM(X,lambda,beta,alpha)},interval=c(0,45),maximum=T)$objective
+  M <-optimise(f=function(X){fM(X,lambda,beta,alpha)},interval=c(0,5),maximum=T)$objective
   X=NULL
   while(length(X)<n){
-    y=rlnorm(n*M, meanlog = lambda, sdlog = beta)
+    y=rgamma(n*M, shape=beta, scale = lambda)
     u=runif(n*M,0,M)
     X=c(X,y[u<fM(y,lambda,beta,alpha)])
   }
   X=X[1:n]
-  WMGG<-matrix(X, ncol=1)
-  return(WMGG)
+  MGG<-matrix(X, ncol=1)
+  return(MGG)
 }
 #X<-rWMGG(n,lambda,beta,alpha)
 ############# EM Algorithm
@@ -62,7 +62,7 @@ EM=function(X){
   cond3=1
   cond4=1
   while((cond2>0.01)&(cond3>0.01)&(cond4>0.01)){
-    Ez=(lambda/(lambda+1))*fGG(X,lambda.old,beta.old,alpha.old)/((1/(lambda+1))*fLBGG(X,lambda.old,beta.old,alpha.old)+(lambda/(lambda+1))*fGG(X,lambda.old,beta.old,alpha.old))
+    Ez=(lambda.old/(lambda.old+1))*fGG(X,lambda.old,beta.old,alpha.old)/((1/(lambda.old+1))*fLBGG(X,lambda.old,beta.old,alpha.old)+(lambda.old/(lambda.old+1))*fGG(X,lambda.old,beta.old,alpha.old))
     ak=mean(Ez)
     jib <-nlminb(c(lambda.old,beta.old,alpha.old), flcomplete1,scale = 100)
     lambda.new<-jib$par[1]
