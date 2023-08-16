@@ -1,7 +1,3 @@
-#lambda <-0.7
-#beta <-1
-#alpha <-3
-#n <- 50
 fGG=function(X,lambda,beta,alpha)
 {
   ((lambda*beta)/(gamma(alpha)))*(lambda*X)^((alpha*beta)-1)*
