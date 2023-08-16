@@ -42,6 +42,7 @@ rWMGG=function(n,lambda,beta,alpha){
 ############# EM Algorithm
 EM=function(X){
   ###Real
+  n=length(X)
   flcomplete1<-function(beta)
   {
     
