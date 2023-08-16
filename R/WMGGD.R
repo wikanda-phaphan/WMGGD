@@ -23,7 +23,7 @@ pWMGG=function(X,lambda,beta,alpha){
 #pWMGG(X,lambda,beta,alpha)
 ######### WMGG-random numbers generation procedure ### 1 time
 fM=function(X,lambda,beta,alpha){
-  fMGG(X,lambda,beta,alpha)/dgamma(X, shape=beta, scale = lambda)
+  dWMGG(X,lambda,beta,alpha)/dgamma(X, shape=beta, scale = lambda)
 }
 
 rWMGG=function(n,lambda,beta,alpha){
