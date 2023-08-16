@@ -27,7 +27,7 @@ fM=function(X,lambda,beta,alpha){
 }
 
 rWMGG=function(n,lambda,beta,alpha){
-  M <-optimise(f=function(X){fM(X,lambda,beta,alpha)},interval=c(0,5),maximum=T)$objective
+  M <-optimise(f=function(X){fM(X,lambda,beta,alpha)},interval=c(0,10),maximum=T)$objective
   X=NULL
   while(length(X)<n){
     y=rgamma(n*M, shape=beta, scale = lambda)
@@ -41,6 +41,7 @@ rWMGG=function(n,lambda,beta,alpha){
 #X<-rWMGG(n,lambda,beta,alpha)
 ############# EM Algorithm
 EM=function(X){
+  X<-as.matrix(X)
   ###Real
   n=length(X)
   flcomplete1<-function(beta)
