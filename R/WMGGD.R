@@ -15,8 +15,8 @@ dWMGG=function(X,lambda,beta,alpha){
 }
 #dWMGG(X,lambda,beta,alpha)
 ############ cdf 
-#install.packages('zipfR')
-#library(zipfR)
+install.packages('zipfR')
+library(zipfR)
 pWMGG=function(X,lambda,beta,alpha){
   1-((lambda/(lambda+1))*Igamma(alpha, (lambda*X)^beta)/gamma(alpha))-((1/(lambda+1))*Igamma(alpha+(1/beta),(lambda*X)^beta)/gamma(alpha+(1/beta)))
 }
